@@ -1,0 +1,6 @@
+---
+endpoint: http://api.nbp.pl/api/exchangerates/tables/
+# date since NBP API started working
+NBPAPIstartdate: 2002-01-02
+# how many retries, in case of API error
+maxretries: 3
