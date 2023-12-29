@@ -1,8 +1,7 @@
-import sys
+from typing import Dict
 import yaml
-import json
 import requests
-from datetime import date, datetime, timedelta
+from datetime import date
 from nbp_prophet.utils.date_utils import split_date_range
 
 
@@ -16,7 +15,7 @@ class NBPApi:
             config = yaml.safe_load(config_file)
             self.endpoint = config["endpoint"]
 
-    def fetch_averages(self, start_date: date, end_date: date):
+    def fetch_averages(self, start_date: date, end_date: date) -> Dict:
         assert (
             end_date >= start_date
         ), f"end_date ({end_date}) must be after or equal start_date ({start_date})"
@@ -30,10 +29,10 @@ class NBPApi:
         res = requests.get(url)
         if res.status_code != 200:
             return []
-        response = json.loads(res.text)
+        response = res.json()
         return response
 
-    def fetch_since(self, since_date: date | str, to_date: date | str):
+    def fetch_since(self, since_date: date | str, to_date: date | str) -> Dict:
         if isinstance(since_date, str):
             since_date = date.fromisoformat(since_date)
         if isinstance(to_date, str):

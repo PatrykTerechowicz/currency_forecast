@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := run 
+.DEFAULT_GOAL := run_web
 
 PYTHON = python3
 
@@ -24,4 +24,4 @@ run_web: init
 	${PYTHON} nbp_prophet/web_ui/app.py
 	
 push: clean
-	git push origin
+	git push -u origin main

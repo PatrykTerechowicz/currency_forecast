@@ -44,7 +44,7 @@ def test_mapping_pipeline_sanity_check():
     except:
         df = None  # if couldn't read then just set it to None
         last_update_date = since_date
-    new_df = data_mapping.update_data(spark, last_update_date, date.today())
+    new_df = data_mapping.get_updated_data(spark, last_update_date, date.today())
     data_mapping.load_data(new_df, data_path)
 
     spark.stop()
@@ -69,7 +69,7 @@ def test_mapping_pipeline_multiple():
         except:
             df = None  # if couldn't read then just set it to None
             last_update_date = since_date
-        new_df = data_mapping.update_data(spark, last_update_date, current_date)
+        new_df = data_mapping.get_updated_data(spark, last_update_date, current_date)
         data_mapping.load_data(new_df, data_path)
 
     dates = list(map(date.fromisoformat, ["2023-02-01", "2023-03-01", "2023-04-01"]))
